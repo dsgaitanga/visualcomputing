@@ -11,7 +11,7 @@ La presente es la plataforma web para la presentación de trabajos y talleres de
 
 ```sh
 {nombre="Daniel Santiago Gaitan Gaitan",
-correo="dsgaitanga@unal.edu.co"}
+correo="dsgaitanga@unal.edu.co"},
 {nombre="Berny Alejandro Orozco Córdoba",
 correo="baorozcoc@unal.edu.co"}
 ```
