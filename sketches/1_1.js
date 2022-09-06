@@ -12,7 +12,6 @@ function draw(){
     radio=50*(1-norm(Math.sqrt(Math.pow(width/2-mouseX,2)+Math.pow(height/2-mouseY,2)), 0, height));
     for(var i=10; i<width;i+=10){
         for(var j=0;j<height;j+=pasos){
-            //strokeWeight();
             strokeWeight(radio*(1-norm(Math.sqrt(Math.pow(width/2-i,2)+Math.pow(height/2-j,2)), 0, height)));
             line(i,j,i,j+pasos);
         }  
