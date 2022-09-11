@@ -1,52 +1,54 @@
 let img;
-
+let matriz;
 function preload() {
-  img = loadImage("/visualcomputing/sketches/imagen.jpg");
+  img = loadImage("/visualcomputing/sketches/minimagen.jpg");
 }
 
 function setup() {
-  createCanvas(600, 1068);
+  createCanvas(img.width*2, img.height);
 }
 
 function draw() {
-  image(img, 0, 0);
-  
-  if (key === "1") { 
-    filter(INVERT);
-    label("INVERT");
-  } else if (key === "2") { 
-    filter(THRESHOLD);
-    label("THRESHOLD");
-  } else if (key === "3") { 
-    filter(GRAY);
-    label("GRAY");
-  } else if (key === "4") { 
-    filter(DILATE);
-    label("DILATE");
-  } else if (key === "5") { 
-    filter(ERODE);
-    label("ERODE");
-  } else if (key === "6") {
-    filter(POSTERIZE, 2);
-    label("POSTERIZE 2");
-  } else if (key === "7") {
-    filter(POSTERIZE, 4);
-    label("POSTERIZE 4");
-   } else if (key === "8") { 
-    filter(BLUR, 3);
-    label("BLUR 3");
-  }  else if (key === "9") { 
-    filter(BLUR, 12);
-    label("BLUR 12");
-  }
+    image(img, 0, 0);
+    if (key === "1") { 
+      filtrado([[-1, -1, -1 ], [ -1,  9, -1 ], [-1, -1, -1 ]])
+    } else if (key === "2") { 
+      filtrado([[-1, -1, -1],[-1, 8, -1],[-1, -1, -1]])
+    } else if (key === "3") { 
+      filtrado([[1, 2, 1],[0, 0, 0],[-1, -2, -1]])
+    } else if (key === "4") { 
+      filtrado([[-5, 4, 0],[0, 2, 0],[0, -1, 0]])
+    } else if (key === "5") { 
+      filtrado([[-2, -1, 0],[-1, 1, 1],[0, 1, 2]])
+    }  else if (key === "6") {
+      filtrado([[1/9, 1/9, 1/9],[1/9, 1/9, 1/9],[1/9, 1/9, 1/9]])
+    } 
 }
-
-function label(s) {
-  fill(0);
-  rectMode(CENTER);
-  rect(width/2, height - 20, 120, 20);
-  textAlign(CENTER, CENTER);
-  fill(255);
-  textSize(16);
-  text(s, width/2, height - 20);
+function filtrado(m) {
+  matriz = m; 
+  newImg = createImage(img.width,img.height);
+  newImg.loadPixels();
+  for (let x = 1; x < img.width - 1; x++) {
+    for (let y = 1; y < img.height - 1; y++) {
+      let suma=0;
+      let suma2=0;
+      let suma3=0;
+      for (kx = -1; kx <= 1; kx++) {
+        for (ky = -1; ky <= 1; ky++) {
+          let posx= x+kx;
+          let posy=y+ky;
+          let pos = (y + ky)*img.width + (x + kx);
+          let px= red(img.get(posx, posy));
+          let px2=green(img.get(posx, posy));
+          let px3=blue(img.get(posx, posy));
+          suma += matriz[ky+1][kx+1] * px;
+          suma2 += matriz[ky+1][kx+1] * px2;
+          suma3 += matriz[ky+1][kx+1] * px3;
+        }
+      }
+      newImg.set(x, y, color(suma,suma2,suma3));
+    }
+  }
+  newImg.updatePixels(); 
+  image(newImg,img.width,0);
 }
