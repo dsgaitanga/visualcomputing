@@ -143,77 +143,108 @@ function draw() {
 
 # Procesamiento de imagen
 
-Se crea un canvas con las dimensiones de la imagen y se le aplica un filtro a la imagen según la entrada del teclado. Las opciones posibles son: INVERT Establece cada píxel en su valor inverso. THRESHOLD, que convierte la imagen a pixeles blancos y negros dependiendo de si están arriba o abajo del umbral. GRAY, convierte cualquier color en la imagen a un equivalente en la escala de grises. DILATE, aumenta las áreas claras. ERODE, reduce las áreas claras. POSTERIZE, limita cada canal de la imagen a un número de colores especificado como parámetro. El parámetro puede definir entre 2 y 255 valores, pero los resultados más notorios se dan con valores bajos. BLUR, hace que la imagen sea borrosa con un proceso Gaussiano, siendo el parámetro el nivel de cuán borroso es el resultado, si no se usa ningún parámetro, el parámetro por defecto es 1, a mayores valores es más borroso el resultado.
+Se crea un canvas con las dimensiones de la imagen y se le aplica un filtro a la imagen en base a una matriz de convolución según la entrada del teclado. Las opciones posibles son: 
+## Filtro de Sobreexposición
+  Resalta los bordes de la imagen con lineas claras.
+  Hace uso de la siguiente matriz:
 
-{{< p5-iframe sketch="/visualcomputing/sketches/1_4.js" width="620" height="1095" >}}
+  {{< katex >}} \begin{bmatrix} -1 & -1 & -1\\ -1 & 9 & -1\\ -1 & -1 & -1 \end{bmatrix} {{< /katex >}}
+ ## Filtro de Bordes
+  Captura los bordes de la imagen y los resalta con lineas blancas, cuyo grosor depende del contraste entre los colores del borde. Todo el resto de la imagen permanece en negro.
+  Hace uso de la siguiente matriz:
+
+  {{< katex >}} \begin{bmatrix} -1 & -1 & -1\\ -1 & 8 & -1\\ -1 & -1 & -1 \end{bmatrix} {{< /katex >}}
+ ## Filtro de Bordes vertical
+  Repasa la imagen de arriba hacia abajo y captura los bordes encontrados en este eje. El resto de la imagen permanece en negro.
+  Hace uso de la siguiente matriz:
+
+  {{< katex >}} \begin{bmatrix} 1 & 2 & 1\\ 0 & 0 & 0\\ -1 & 2 & -1 \end{bmatrix} {{< /katex >}}
+ ## Filtro de Bordes horizontal
+  Repasa la imagen de derecha a izquierda y captura los bordes encontrados en este eje. El resto de la imagen permanece en negro.
+  Hace uso de la siguiente matriz:
+
+  {{< katex >}} \begin{bmatrix} -5 & 4 & 0\\ 0 & 2 & 0\\ 0 & -1 & 0 \end{bmatrix} {{< /katex >}}
+ ## Filtro Afilado
+  Aquellos pixeles con vecinos distintos se potencian.
+  Hace uso de la siguiente matriz:
+
+  {{< katex >}} \begin{bmatrix} -2 & -1 & 0\\ -1 & 1 & 1\\ 0 & 1 & 2 \end{bmatrix} {{< /katex >}}
+ ## Filtro de Desenfoque
+  Hace que la imagen sea borrosa con un proceso Gaussiano.
+  Usa de la siguiente matriz:
+
+  {{< katex >}} \begin{bmatrix} 1/9 & 1/9 & 1/9\\ 1/9 & 1/9 & 1/9\\ 1/9 & 1/9 & 1/9 \end{bmatrix} {{< /katex >}}
+
+
+
+{{< p5-iframe sketch="/visualcomputing/sketches/1_4.js" width="620" height="560" >}}
 
 {{< hint info >}}
 Los filtros se aplican según la tecla que ingrese el usuario
-- 1 aplica el filtro invertido
-- 2 aplica el filtro Blanco y negro
-- 3 aplica el filtro de escala de grises
-- 4 aplica el filtro de dilatación
-- 5 aplica el filtro de erosión
-- 6 aplica el filtro de posterización con intensidad 2
-- 7 aplica el filtro de posterización con intensidad 4
-- 8 aplica el filtro de desenfoque con intensidad 3 
-- 9 aplica el filtro de desenfoque con intensidad 12
+- 1 aplica el filtro de Sobreexposición
+- 2 aplica el filtro de Detección de bordes uniforme
+- 3 aplica el filtro de Detección de bordes vertical
+- 4 aplica el filtro de Detección de bordes horizontal
+- 5 aplica el filtro de Afilado
+- 6 aplica el filtro de desenfoque gaussiano
 {{< /hint >}}
 
 
 {{< details "Código Fuente" open >}}
 ```tpl
 let img;
-
+let matriz;
 function preload() {
-  img = loadImage("/visualcomputing/sketches/imagen.jpg");
+  img = loadImage("/visualcomputing/sketches/minimagen.jpg");
 }
 
 function setup() {
-  createCanvas(600, 1068);
+  createCanvas(img.width*2, img.height);
 }
 
 function draw() {
-  image(img, 0, 0);
-  
-  if (key === "1") { 
-    filter(INVERT);
-    label("INVERT");
-  } else if (key === "2") { 
-    filter(THRESHOLD);
-    label("THRESHOLD");
-  } else if (key === "3") { 
-    filter(GRAY);
-    label("GRAY");
-  } else if (key === "4") { 
-    filter(DILATE);
-    label("DILATE");
-  } else if (key === "5") { 
-    filter(ERODE);
-    label("ERODE");
-  } else if (key === "6") {
-    filter(POSTERIZE, 2);
-    label("POSTERIZE 2");
-  } else if (key === "7") {
-    filter(POSTERIZE, 4);
-    label("POSTERIZE 4");
-   } else if (key === "8") { 
-    filter(BLUR, 3);
-    label("BLUR 3");
-  }  else if (key === "9") { 
-    filter(BLUR, 12);
-    label("BLUR 12");
-  }
+    image(img, 0, 0);
+    if (key === "1") { 
+      filtrado([[-1, -1, -1 ], [ -1,  9, -1 ], [-1, -1, -1 ]])
+    } else if (key === "2") { 
+      filtrado([[-1, -1, -1],[-1, 8, -1],[-1, -1, -1]])
+    } else if (key === "3") { 
+      filtrado([[1, 2, 1],[0, 0, 0],[-1, -2, -1]])
+    } else if (key === "4") { 
+      filtrado([[-5, 4, 0],[0, 2, 0],[0, -1, 0]])
+    } else if (key === "5") { 
+      filtrado([[-2, -1, 0],[-1, 1, 1],[0, 1, 2]])
+    }  else if (key === "6") {
+      filtrado([[1/9, 1/9, 1/9],[1/9, 1/9, 1/9],[1/9, 1/9, 1/9]])
+    } 
 }
-
-function label(s) {
-  fill(0);
-  rectMode(CENTER);
-  rect(width/2, height - 20, 120, 20);
-  textAlign(CENTER, CENTER);
-  fill(255);
-  textSize(16);
-  text(s, width/2, height - 20);
+function filtrado(m) {
+  matriz = m; 
+  newImg = createImage(img.width,img.height);
+  newImg.loadPixels();
+  for (let x = 1; x < img.width - 1; x++) {
+    for (let y = 1; y < img.height - 1; y++) {
+      let suma=0;
+      let suma2=0;
+      let suma3=0;
+      for (kx = -1; kx <= 1; kx++) {
+        for (ky = -1; ky <= 1; ky++) {
+          let posx= x+kx;
+          let posy=y+ky;
+          let pos = (y + ky)*img.width + (x + kx);
+          let px= red(img.get(posx, posy));
+          let px2=green(img.get(posx, posy));
+          let px3=blue(img.get(posx, posy));
+          suma += matriz[ky+1][kx+1] * px;
+          suma2 += matriz[ky+1][kx+1] * px2;
+          suma3 += matriz[ky+1][kx+1] * px3;
+        }
+      }
+      newImg.set(x, y, color(suma,suma2,suma3));
+    }
+  }
+  newImg.updatePixels(); 
+  image(newImg,img.width,0);
 }
 ```
 {{< /details >}}
