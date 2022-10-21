@@ -8,6 +8,7 @@ let led;
 let metal;
 let metal_rojo;
 let metal_azul;
+let texturas=0;
 //Variables de rotación y traslación generales
 let trans1=0;
 let rot1=0;
@@ -31,6 +32,8 @@ function preload(){
 }
 
 function setup(){
+    checkbox = createCheckbox('Texturas', false);
+    checkbox.changed(myCheckedEvent);
     createCanvas(600,600,WEBGL);
     for(let x=0;x<6;x++){
         speeds[x]=[];
@@ -50,8 +53,11 @@ function draw(){
     rotateY(map(mouseY,0,height,0,2*PI));
     noStroke();
     normalMaterial();
-    texture(fondo);
-    sphere(4000-mouseX);
+    if(texturas==1){
+        texture(fondo);
+        sphere(4000-mouseX);
+    }
+    
 
     let sec=millis()/1000;
 
@@ -59,7 +65,7 @@ function draw(){
     rotateX(PI);
     scale(2);
     translate(0,-20,-10);
-    texture(tubo);
+    if(texturas==1){texture(tubo);}
     model(pipe);
     pop();
 
@@ -70,7 +76,7 @@ function draw(){
     sphere(50);
     pop();
     //TUBO CENTRAL
-    texture(metal_azul);
+    if(texturas==1){texture(metal_azul);}
     if(sec>0&&trans1<350){
         translate(0,-120-trans1,-350+trans1);
         rotateX(map(trans1,0,350,PI/2,0));
@@ -90,10 +96,10 @@ function draw(){
     }
     cylinder(70,700);
     translate(0,-350,0);
-    texture(metal_rojo);
+    if(texturas==1){texture(metal_rojo);}
     cylinder(80,200);
     rotateX(PI/2);
-    texture(metal);
+    if(texturas==1){texture(metal);}
     torus(100,10);
     cylinder(50,500);
     translate(0,-350,0);
@@ -102,7 +108,7 @@ function draw(){
     rotateX(PI);
     scale(5);
     translate(0,-20,0);
-    texture(metal_rojo);
+    if(texturas==1){texture(metal_rojo);}
     model(cube);
     pop();
 
@@ -111,7 +117,7 @@ function draw(){
         rotateX(-PI/2);//Base de los brazos
         rotateZ(rot1);
         translate(0,0,150);
-        texture(led);
+        if(texturas==1){texture(led);}
         torus(80,80);
 
         
@@ -119,7 +125,7 @@ function draw(){
             push();
             rotateZ(PI/3*x);
             translate(400,0,0);
-            texture(metal_azul);
+            if(texturas==1){texture(metal_azul);}
             box(550,100,100);
             translate(200,0,0);
             box(40,40,200);
@@ -127,7 +133,7 @@ function draw(){
                 rotateX(-PI/2);
                 model(pipe);
                 translate(0,200,0);
-                texture(metal_rojo);
+                if(texturas==1){texture(metal_rojo);}
                 box(40,200,40);
                 for(let i=0; i<2;i++){
                     push();
@@ -138,7 +144,7 @@ function draw(){
                     rotateY(PI*i);
                     translate(0,0,10*i);
                     translate(0,-50,50);
-                    texture(metal);
+                    if(texturas==1){texture(metal);}
                     model(silla);
                     translate(50,0,0);
                     model(silla);
@@ -173,3 +179,10 @@ function draw(){
     camera(0,0,(height/2) / tan(PI/6),0,-330,0,0,1,0);
 
 }
+function myCheckedEvent() {
+    if (checkbox.checked()) {
+      texturas=1;
+    } else {
+      texturas=0;
+    }
+  }
