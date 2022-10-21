@@ -1,20 +1,26 @@
 # SegundoTaller
 
-Para la implementación del segúndo taller decidimos usar como base la atracción de Mundo Aventura "Ikaro".
-https://www.youtube.com/watch?v=NQMO0Ib_osg&ab_channel=JaguarLiveTV.
+Para la implementación del segúndo taller decidimos usar como base **La atracción de Mundo Aventura "Ikaro".** La complejidad de su implementación radica en la gran cantidad de movimientos que realiza, para lo cual se deben hacer traslaciones y rotaciones anidadas, lo que lo convierte en un proyecto interesante a simular. 
+
+{{< youtube NQMO0Ib_osg >}}
+
+## Funcionamiento
 
 El mecanismo de esta atracción funciona de la siguiente forma:
--  El brazo principal sube la rueda cuando la atracción inicia, de forma que pase de 0 a 90 grados respecto a los ejes X,Y.
+-  El brazo principal sube la rueda cuando la atracción inicia, de forma que pasa de 0 a 90 grados respecto a los ejes X,Y en los primeros segundos.
 -  La rueda comienza a rotar en la dirección de las manecillas del reloj, desde una velocidad 0 a una velocidad máxima en los primeros 10 segundos aproximadamente.
 -  En cada uno de los 6 brazos que se conectan con la rueda, se encuentran dos parejas de asientos, los cuales rotan bajo su propio eje a velocidades variables entre si.
 -  El brazo principal también gira bajo su propio eje cada 30 segundos, rota hasta 180 grados en dirección inversa a las manecillas del reloj durante 10 segundos, permanece 10 segundos en esa posición y durante los siguientes 10 segundos vuelve a su posición inicial rotando 180 grados en dirección de las manecillas del reloj.
 
-Para su modelamiento se aplicó una serie sucesiva de traslaciones y rotaciones a todos los componentes del mecanismo de manera anidada.
+Para su modelamiento se aplicó una serie sucesiva de traslaciones y rotaciones a todos los componentes del mecanismo de manera anidada. No se usó ninguna referencia para el modelado de la atracción, solo los videos e imágenes obtenidas del mismo.
 
-{{< p5-iframe sketch="/visualcomputing/sketches/taller2.js" width="630" height="630" >}}
+{{< p5-iframe sketch="/visualcomputing/sketches/taller2.js" width="630" height="650" >}}
 
+## Instrucciones de uso
 {{< hint info >}}
 Para interactuar con la simulación se hace uso del mouse, es posible rotar alrededor del mecanismo moviendo el mouse en el eje Y, también es posible hacer Zoom en el mecanismo moviendo el mouse en el eje X.
+
+De igual manera, es posible usar el checkbox ubicado en la parte inferior del canvas para aplicar las texturas.
 {{< /hint >}}
 
 
@@ -30,6 +36,7 @@ let led;
 let metal;
 let metal_rojo;
 let metal_azul;
+let texturas=0;
 //Variables de rotación y traslación generales
 let trans1=0;
 let rot1=0;
@@ -41,18 +48,20 @@ let rotations=[];
 //FONDO
 let fondo;
 function preload(){
-    silla= loadModel('silla.obj');
-    cube=loadModel('cube.obj');
-    pipe=loadModel('pipe.obj');
-    tubo=loadImage('tubo.jpg');
-    led=loadImage('led.jpg');
-    metal=loadImage('metal.jpg');
-    metal_rojo=loadImage('metal_rojo.jpg');
-    metal_azul=loadImage('metal_azul.jpg');
-    fondo=loadImage('FONDO.jpg');
+    silla= loadModel('/visualcomputing/sketches/silla.obj');
+    cube=loadModel('/visualcomputing/sketches/cube.obj');
+    pipe=loadModel('/visualcomputing/sketches/pipe.obj');
+    tubo=loadImage('/visualcomputing/sketches/tubo.jpg');
+    led=loadImage('/visualcomputing/sketches/led.jpg');
+    metal=loadImage('/visualcomputing/sketches/metal.jpg');
+    metal_rojo=loadImage('/visualcomputing/sketches/metal_rojo.jpg');
+    metal_azul=loadImage('/visualcomputing/sketches/metal_azul.jpg');
+    fondo=loadImage('/visualcomputing/sketches/FONDO.jpg');
 }
 
 function setup(){
+    checkbox = createCheckbox('Texturas', false);
+    checkbox.changed(myCheckedEvent);
     createCanvas(600,600,WEBGL);
     for(let x=0;x<6;x++){
         speeds[x]=[];
@@ -72,8 +81,11 @@ function draw(){
     rotateY(map(mouseY,0,height,0,2*PI));
     noStroke();
     normalMaterial();
-    texture(fondo);
-    sphere(4000-mouseX);
+    if(texturas==1){
+        texture(fondo);
+        sphere(4000-mouseX);
+    }
+    
 
     let sec=millis()/1000;
 
@@ -81,7 +93,7 @@ function draw(){
     rotateX(PI);
     scale(2);
     translate(0,-20,-10);
-    texture(tubo);
+    if(texturas==1){texture(tubo);}
     model(pipe);
     pop();
 
@@ -92,7 +104,7 @@ function draw(){
     sphere(50);
     pop();
     //TUBO CENTRAL
-    texture(metal_azul);
+    if(texturas==1){texture(metal_azul);}
     if(sec>0&&trans1<350){
         translate(0,-120-trans1,-350+trans1);
         rotateX(map(trans1,0,350,PI/2,0));
@@ -112,10 +124,10 @@ function draw(){
     }
     cylinder(70,700);
     translate(0,-350,0);
-    texture(metal_rojo);
+    if(texturas==1){texture(metal_rojo);}
     cylinder(80,200);
     rotateX(PI/2);
-    texture(metal);
+    if(texturas==1){texture(metal);}
     torus(100,10);
     cylinder(50,500);
     translate(0,-350,0);
@@ -124,7 +136,7 @@ function draw(){
     rotateX(PI);
     scale(5);
     translate(0,-20,0);
-    texture(metal_rojo);
+    if(texturas==1){texture(metal_rojo);}
     model(cube);
     pop();
 
@@ -133,7 +145,7 @@ function draw(){
         rotateX(-PI/2);//Base de los brazos
         rotateZ(rot1);
         translate(0,0,150);
-        texture(led);
+        if(texturas==1){texture(led);}
         torus(80,80);
 
         
@@ -141,7 +153,7 @@ function draw(){
             push();
             rotateZ(PI/3*x);
             translate(400,0,0);
-            texture(metal_azul);
+            if(texturas==1){texture(metal_azul);}
             box(550,100,100);
             translate(200,0,0);
             box(40,40,200);
@@ -149,7 +161,7 @@ function draw(){
                 rotateX(-PI/2);
                 model(pipe);
                 translate(0,200,0);
-                texture(metal_rojo);
+                if(texturas==1){texture(metal_rojo);}
                 box(40,200,40);
                 for(let i=0; i<2;i++){
                     push();
@@ -160,7 +172,7 @@ function draw(){
                     rotateY(PI*i);
                     translate(0,0,10*i);
                     translate(0,-50,50);
-                    texture(metal);
+                    if(texturas==1){texture(metal);}
                     model(silla);
                     translate(50,0,0);
                     model(silla);
@@ -186,7 +198,7 @@ function draw(){
                     speeds[x][y]=random(-0.03,-0.02);
                 }
                 else{
-                    speeds[x][y]=random(0-02,0.03);
+                    speeds[x][y]=random(0.02,0.03);
                 }
             }
             rotations[x][y]+=speeds[x][y];
@@ -195,5 +207,16 @@ function draw(){
     camera(0,0,(height/2) / tan(PI/6),0,-330,0,0,1,0);
 
 }
+function myCheckedEvent() {
+    if (checkbox.checked()) {
+      texturas=1;
+    } else {
+      texturas=0;
+    }
+  }
 ```
 {{< /details >}}
+
+## Recursos
+-  https://www.models-resource.com/ (Modelos en .obj)
+-  https://www.youtube.com/ (Videos de la atracción)
