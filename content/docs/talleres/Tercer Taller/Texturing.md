@@ -104,50 +104,67 @@ function mouseWheel(event) {
 ### Texture sampling
 {{< details "Código Fuente" close >}}
 ```js
-// Código adaptado de la página https://visualcomputing.github.io/docs/shaders/texturing/
-let easycam;
-let uvShader;
-let opacity;
+let greyShader;
+let img;
+let grey_scale;
+
 function preload() {
-  uvShader = readShader('/shaders/uv_alpha.frag', { matrices: Tree.pmvMatrix, varyings: Tree.texcoords2 });
+  greyShader = readShader('/visualcomputing/sketches/grey.frag',
+                        { varyings: Tree.texcoords2 });
+  img = loadImage('/visualcomputing/sketches/grey.jpg');
 }
+
 function setup() {
-  createCanvas(600, 450, WEBGL);
-  let state = {
-    distance: 250,
-    center: [0, 0, 0],
-    rotation: [0, 0, 0, 1],
-  };
-  easycam = createEasyCam();
-  easycam.state_reset = state;
-  easycam.setState(state, 2000);
-  textureMode(NORMAL);
-  opacity = createSlider(0, 1, 0.5, 0.01);
-  opacity.position(10, 25);
-  opacity.style('width', '280px');
-}
-function draw() {
-  background(200);
-  resetShader();
-  axes();
-  grid();
-  translate(0, 30);
-  fill(color(0, 50, 50, 200));
-  rotateX(frameCount * 0.01);
-  rotateZ(frameCount * 0.01);
-  cone(40, 70);
-  // use custom shader
-  shader(uvShader);
-  uvShader.setUniform('opacity', opacity.value());
-  beginHUD();
+  createCanvas(700, 500, WEBGL);
   noStroke();
-  quad(0, 0, width, 0, width, height, 0, height);
-  endHUD();
+  textureMode(NORMAL);
+  shader(greyShader);
+  grey_scale = createCheckbox('Grey', false);
+  grey_scale.position(10, 10);
+  grey_scale.style('color', 'white');
+  grey_scale.input(() => greyShader.setUniform('grey_scale',
+                                                grey_scale.checked()));
+  greyShader.setUniform('texture', img);
 }
-function mouseWheel(event) {
-  return false;
+
+function draw() {
+  background(0);
+  quad(-width / 2, -height / 2, width / 2, -height / 2,
+        width / 2, height / 2, -width / 2, height / 2);
 }
 ```
 {{< /details >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/texture_grey.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js"  width="625" height="475">}}
+{{< p5-iframe sketch="/visualcomputing/sketches/texture_grey.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js"  width="650" height="445">}}
 
+En el modelo de "cono hexagonal" de HSV, el valor se define como el valor del componente más grande de un color. Esto coloca los tres colores primarios y también todos los "colores secundarios" (cian, amarillo y magenta) en un plano con el blanco, formando una pirámide hexagonal fuera del cubo RGB.
+
+{{< details title="Ver código" open=false >}}
+```js
+let lumaShader;
+let img;
+let grey_scale;
+
+function preload() {
+  lumaShader = readShader('/visualcomputing/sketches/luma.frag', { varyings: Tree.texcoords2 });
+  img = loadImage('/visualcomputing/sketches/color.jpeg');
+}
+
+function setup() {
+  createCanvas(700, 500, WEBGL);
+  noStroke();
+  textureMode(NORMAL);
+  shader(lumaShader);
+  grey_scale = createCheckbox('HSV', false);
+  grey_scale.position(10, 10);
+  grey_scale.style('color', 'white');
+  grey_scale.input(() => lumaShader.setUniform('grey_scale', grey_scale.checked()));
+  lumaShader.setUniform('texture', img);
+}
+
+function draw() {
+  background(0);
+  quad(-width / 2, -height / 2, width / 2, -height / 2, width / 2, height / 2, -width / 2, height / 2);
+}
+```
+{{< /details >}}
+{{< p5-iframe sketch="/visualcomputing/sketches/lumaf.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
