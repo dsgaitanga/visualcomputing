@@ -9,7 +9,7 @@ function preload() {
 
 function setup() {
   // shaders require WEBGL mode to work
-  createCanvas(400, 400, WEBGL);
+  createCanvas(300, 300, WEBGL);
   // https://p5js.org/reference/#/p5/shader
   shader(colorShader);
   randomizeTriangle();
