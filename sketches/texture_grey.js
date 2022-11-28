@@ -3,7 +3,7 @@ let img;
 let grey_scale;
 
 function preload() {
-  greyShader = readShader('/shaders/grey.frag',
+  greyShader = readShader('/visualcomputing/sketches/grey.frag',
                         { varyings: Tree.texcoords2 });
   img = loadImage('visualcomputing/sketches/grey.jpg');
 }

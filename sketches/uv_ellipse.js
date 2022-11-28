@@ -4,7 +4,7 @@ function preload() {
   // Define geometry directly in clip space (i.e., matrices: Tree.NONE).
   // Interpolate only texture coordinates (i.e., varyings: Tree.texcoords2).
   // see: https://github.com/VisualComputing/p5.treegl#handling
-  uvShader = readShader('/shaders/uv.frag', { matrices: Tree.NONE, varyings: Tree.texcoords2 });
+  uvShader = readShader('/visualcomputing/sketches/uv.frag', { matrices: Tree.NONE, varyings: Tree.texcoords2 });
 }
 
 function setup() {
