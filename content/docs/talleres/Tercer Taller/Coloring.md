@@ -1,7 +1,9 @@
 # Tercer Taller
+Para la implementación del tercer taller realizamos un conjunto de ejercicios que implementan conceptos de la matería como **Coloring** y **Shaders**. Dos de estos ejercicios están basados en la simulación de **La atracción de Mundo Aventura "Ikaro"** del taller 2.
+
+{{< youtube NQMO0Ib_osg >}}
 
 ## Coloring
-
 ### CMY and RGB Color models
 El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**. 
 
@@ -69,10 +71,6 @@ function mouseMoved () {
 }
 ```
 {{< /details >}}
-
-Para la implementación del tercer taller realizamos un conjunto de ejercicios que implementan conceptos de la matería como **Coloring** y **Shaders**. Dos de estos ejercicios están basados en la simulación de **La atracción de Mundo Aventura "Ikaro"** del taller 2.
-
-{{< youtube NQMO0Ib_osg >}}
 
 Añadido al ejercicio del taller 2, se implementaron funcionalidades de **Coloring** al mecanismo, en donde existen 4 opciones de uso:
 - **Sin Texturas:** Usa un Material Normal de P5js y el fondo es blanco, es la opción predeterminada.
