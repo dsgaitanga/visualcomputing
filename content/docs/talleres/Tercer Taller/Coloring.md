@@ -1,10 +1,79 @@
-# TercerTaller
+# Tercer Taller
+
+## Coloring
+
+### CMY and RGB Color models
+El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**. 
+
+### Instrucciones de uso
+{{< hint info >}}
+A medida que el ratón se desplaza dentro del lienzo, es posible observar la interpolación de los colores.
+Presiona:
+- **R:** Para aleatorizar el triángulo.
+- **C:** Para cambiar entre los modelos de color rgba y cmya.
+{{< /hint >}}
+
+{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="630" height="680" >}}
+
+{{< details "Código Fuente" close >}}
+```tpl
+let colorShader;
+let cmy;
+let v1, v2, v3;
+let color = 255;
+function preload() {
+
+  colorShader = readShader('visualcomputing/sketches/shaders/color.frag', { matrices: Tree.NONE, varyings: Tree.color4 });
+}
+
+function setup() {
+  // shaders require WEBGL mode to work
+  createCanvas(600, 450, WEBGL);
+  // https://p5js.org/reference/#/p5/shader
+  shader(colorShader);
+  randomizeTriangle();
+}
+
+function draw() {
+  background(0);
+
+  beginShape(TRIANGLES);
+  fill(color);
+  vertex(v1.x, v1.y);
+  fill('blue');
+  vertex(v2.x, v2.y);
+  fill('purple');
+  vertex(v3.x, v3.y);
+  endShape();
+}
+
+function randomizeTriangle() {
+  v1 = p5.Vector.random2D();
+  v2 = p5.Vector.random2D();
+  v3 = p5.Vector.random2D();
+}
+
+function keyPressed() {
+  if (key == 'c') {
+    cmy = !cmy;
+    colorShader.setUniform('cmy', cmy);
+  }
+  if (key == 'r') {
+    randomizeTriangle();
+  }
+}
+function mouseMoved () {
+  color = color + 2;
+  if (color > 280) {
+    color = 0;
+  }
+}
+```
+{{< /details >}}
 
 Para la implementación del tercer taller realizamos un conjunto de ejercicios que implementan conceptos de la matería como **Coloring** y **Shaders**. Dos de estos ejercicios están basados en la simulación de **La atracción de Mundo Aventura "Ikaro"** del taller 2.
 
 {{< youtube NQMO0Ib_osg >}}
-
-## Coloring
 
 Añadido al ejercicio del taller 2, se implementaron funcionalidades de **Coloring** al mecanismo, en donde existen 4 opciones de uso:
 - **Sin Texturas:** Usa un Material Normal de P5js y el fondo es blanco, es la opción predeterminada.
