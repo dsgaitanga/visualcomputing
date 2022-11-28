@@ -2,7 +2,7 @@
 
 Se pueden implementar todo tipo de geometrías no euclidianas creando un enlace entre diferentes lugares del espacio 3D que comparten el mismo punto de vista:
 
-{{< details "non_euclidean.js" >}}
+{{< details "Código Fuente" close >}}
 ```js
 let easycam;
 let edge = 80;
