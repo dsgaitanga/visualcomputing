@@ -2,7 +2,7 @@
 ## Coloring
 
 ### CMY and RGB Color models
-El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**. 
+El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**
 
 **Instrucciones de uso**
 {{< hint info >}}
