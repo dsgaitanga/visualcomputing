@@ -1,5 +1,5 @@
 # Tercer Taller
-
+{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="630" height="680" >}}
 ## Coloring
 
 ### CMY and RGB Color models
