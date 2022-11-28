@@ -67,7 +67,7 @@ function mouseMoved () {
 }
 ```
 {{< /details >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="400" height="400" >}}
+{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="310" height="310" >}}
 
 
 Para la implementación del tercer taller realizamos un conjunto de ejercicios que implementan conceptos de la matería como **Coloring** y **Shaders**. Dos de estos ejercicios están basados en la simulación de **La atracción de Mundo Aventura "Ikaro"** del taller 2.
