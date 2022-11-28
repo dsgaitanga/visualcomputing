@@ -49,44 +49,6 @@ function draw() {
 {{< /details >}}
 {{< p5-iframe sketch="/visualcomputing/sketches/uv_ellipse.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
 
-### 3D World
-{{< details "Código Fuente" close >}}
-```js
-// Código adaptado de la página https://visualcomputing.github.io/docs/shaders/texturing/
-let easycam;
-let uvShader;
-function preload() {
-  uvShader = readShader('/shaders/uv.frag', { matrices: Tree.pmvMatrix, varyings: Tree.texcoords2 });
-}
-function setup() {
-  createCanvas(600, 450, WEBGL);
-  textureMode(NORMAL);
-  // use custom shader
-  shader(uvShader);
-  console.log(Tree.pmvMatrix);
-}
-function draw() {
-  background(200);
-  orbitControl();
-  axes();
-  push();
-  noStroke();
-  // world-space quad (i.e., p5 world space definition: https://shorturl.at/dhCK2)
-  beginShape(TRIANGLES);
-  vertex(30, 75);
-  vertex(40, 20);
-  vertex(50, 75);
-  endShape();
-  pop();
-}
-function mouseWheel(event) {
-  //comment to enable page scrolling
-  return false;
-}
-```
-{{< /details >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/uv_world.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
-
 ### 3D Screen
 {{< details "Código Fuente" close >}}
 ```js
