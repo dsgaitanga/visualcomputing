@@ -12,7 +12,7 @@ Presiona:
 - **C:** Para cambiar entre los modelos de color rgba y cmya.
 {{< /hint >}}
 
-{{< details "Código Fuente" open=false >}}
+{{< details "Código Fuente" close >}}
 ```tpl
 let colorShader;
 let cmy;
@@ -87,7 +87,7 @@ Para interactuar con la simulación se hace uso del mouse, es posible rotar alre
 El selector de la parte inferior permite cambiar las opciones de Coloring, y el conjunto de ColorPicker permite cambiar los colores que están directamente relacionados a las 3 últimas opciones del ejercicio.
 {{< /hint >}}
 
-{{< details "Código Fuente" open=false >}}
+{{< details "Código Fuente" close >}}
 ```tpl
 //OBJETOS
 let silla;
