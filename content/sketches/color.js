@@ -4,7 +4,7 @@ let v1, v2, v3;
 let color = 255;
 function preload() {
 
-  colorShader = readShader('visualcomputing/sketches/shaders/color.frag', { matrices: Tree.NONE, varyings: Tree.color4 });
+  colorShader = readShader('/visualcomputing/sketches/shaders/color.frag', { matrices: Tree.NONE, varyings: Tree.color4 });
 }
 
 function setup() {

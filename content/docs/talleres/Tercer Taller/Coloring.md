@@ -5,14 +5,13 @@
 ### CMY and RGB Color models
 El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**. 
 
-### Instrucciones de uso
+**Instrucciones de uso**
 {{< hint info >}}
 A medida que el ratón se desplaza dentro del lienzo, es posible observar la interpolación de los colores.
 Presiona:
 - **R:** Para aleatorizar el triángulo.
 - **C:** Para cambiar entre los modelos de color rgba y cmya.
 {{< /hint >}}
-
 {{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="630" height="680" >}}
 
 {{< details "Código Fuente" close >}}
@@ -83,7 +82,7 @@ Añadido al ejercicio del taller 2, se implementaron funcionalidades de **Colori
 
 {{< p5-iframe sketch="/visualcomputing/sketches/taller3.js" width="630" height="680" >}}
 
-### Instrucciones de uso
+**Instrucciones de uso**
 {{< hint info >}}
 Para interactuar con la simulación se hace uso del mouse, es posible rotar alrededor del mecanismo moviendo el mouse en el eje Y, también es posible hacer Zoom en el mecanismo moviendo el mouse en el eje X.
 
