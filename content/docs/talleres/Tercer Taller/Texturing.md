@@ -7,7 +7,7 @@ El mapeo de texturas es un método para definir detalles de alta frecuencia, tex
 El mapeo de texturas originalmente se refería al mapeo difuso, un método que mapeaba píxeles de una textura a una superficie 3D ("envolviendo" la imagen alrededor del objeto). En las últimas décadas, el advenimiento del renderizado multipaso, multitexturización, mipmaps y mapeos más complejos como el mapeo de altura, el mapeo de relieve, el mapeo normal, el mapeo de desplazamiento, el mapeo de reflexión, el mapeo especular, el mapeo de oclusión y muchas otras variaciones de la técnica. (controlados por un sistema de materiales) han hecho posible simular casi fotorrealismo en tiempo real al reducir enormemente la cantidad de polígonos y cálculos de iluminación necesarios para construir una escena 3D realista y funcional.
 
 La textura se define en "uv space", que a su vez se puede mostrar de varias formas como la que se muestra a continuación utilizando los colores azul y rojo. En el segundo ejemplo se usa una *shape* diferente, en este caso es una elipse:
-{{< details title="Ver código" close >}}
+{{< details "Código Fuente" close >}}
 ```js
 // Código adaptado de la página https://visualcomputing.github.io/docs/shaders/texturing/
 let uvShader;
@@ -29,7 +29,7 @@ function draw() {
 {{< p5-iframe sketch="/visualcomputing/sketches/uv.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
 
 
-{{< details title="Ver código" close >}}
+{{< details "Código Fuente" close >}}
 ```js
 let uvShader;
 function preload() {
@@ -50,7 +50,7 @@ function draw() {
 {{< p5-iframe sketch="/visualcomputing/sketches/uv_ellipse.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
 
 ### 3D World
-{{< details title="Ver código" close >}}
+{{< details "Código Fuente" close >}}
 ```js
 // Código adaptado de la página https://visualcomputing.github.io/docs/shaders/texturing/
 let easycam;
@@ -88,7 +88,7 @@ function mouseWheel(event) {
 {{< p5-iframe sketch="/visualcomputing/sketches/uv_world.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
 
 ### 3D Screen
-{{< details title="Ver código" close >}}
+{{< details "Código Fuente" close >}}
 ```js
 // Código adaptado de la página https://visualcomputing.github.io/docs/shaders/texturing/
 let easycam;
@@ -140,7 +140,7 @@ function mouseWheel(event) {
 
 
 ### Texture sampling
-{{< details title="Ver código" close >}}
+{{< details "Código Fuente" close >}}
 ```js
 // Código adaptado de la página https://visualcomputing.github.io/docs/shaders/texturing/
 let easycam;
