@@ -13,7 +13,7 @@ function preload() {
                          { varyings: Tree.NONE });
   fox = loadModel('/visualcomputing/sketches/fox.obj', true);
   cow = loadModel('/visualcomputing/sketches/cow.obj', true);
-  woody = loadModel('/visualcomputing/sketches/woody.obj', true);
+  jengi = loadModel('/visualcomputing/sketches/jengi.obj', true);
   horse = loadModel('/visualcomputing/sketches/horse.obj', true);
   bunny = loadModel('/visualcomputing/sketches/bunny.obj', true);
   teapot = loadModel('/visualcomputing/sketches/teapot.obj', true);
@@ -29,7 +29,7 @@ function setup() {
   easycam = createEasyCam();
   foxTex = createGraphics(width, height, WEBGL);
   cowTex = createGraphics(width, height, WEBGL);
-  woodyTex = createGraphics(width, height, WEBGL);
+  jengiTex = createGraphics(width, height, WEBGL);
   horseTex = createGraphics(width, height, WEBGL);
   bunnyTex = createGraphics(width, height, WEBGL);
   teapotTex = createGraphics(width, height, WEBGL);
@@ -70,18 +70,18 @@ function draw() {
   foxTex.model(fox);
   foxTex.pop();
 
-  woodyTex.background(200);
-  woodyTex.reset();
-  woodyTex.camera(position.x, position.y, position.z,
+  jengiTex.background(200);
+  jengiTex.reset();
+  jengiTex.camera(position.x, position.y, position.z,
                   center.x, center.y, center.z,
                   up.x, up.y, up.z);
-  woodyTex.push();
-  woodyTex.noStroke();
-  woodyTex.fill('black');
-  woodyTex.scale(1, -1);
-  woodyTex.scale(0.8);// only woody
-  woodyTex.model(woody);
-  woodyTex.pop();
+  jengiTex.push();
+  jengiTex.noStroke();
+  jengiTex.fill('black');
+  jengiTex.scale(1, -1);
+  jengiTex.scale(0.8);// only jengi
+  jengiTex.model(jengi);
+  jengiTex.pop();
 
   horseTex.background(200);
   horseTex.reset();
@@ -143,7 +143,7 @@ function draw() {
   vertex(+edge, +edge, +edge);
   endShape(CLOSE);
   // back (-z)
-  texShader.setUniform('texture', woodyTex);
+  texShader.setUniform('texture', jengiTex);
   beginShape();
   vertex(+edge, +edge, -edge);
   vertex(-edge, +edge, -edge);
