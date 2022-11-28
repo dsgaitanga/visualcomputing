@@ -12,7 +12,7 @@ Presiona:
 - **R:** Para aleatorizar el triángulo.
 - **C:** Para cambiar entre los modelos de color rgba y cmya.
 {{< /hint >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="600" height="450" >}}
+{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js">}}
 
 {{< details "Código Fuente" close >}}
 ```tpl
