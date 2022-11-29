@@ -5,7 +5,7 @@ Para la implementación del tercer taller realizamos un conjunto de ejercicios q
 
 ## Coloring
 ### CMY and RGB Color models
-El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**. 
+El siguiente canva muestra cómo interpolar los datos de color a lo largo de un triángulo y cómo cambiar entre los modelos de color **rgba y cmya**
 
 **Instrucciones de uso**
 {{< hint info >}}
@@ -14,7 +14,6 @@ Presiona:
 - **R:** Para aleatorizar el triángulo.
 - **C:** Para cambiar entre los modelos de color rgba y cmya.
 {{< /hint >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js">}}
 
 {{< details "Código Fuente" close >}}
 ```tpl
@@ -24,7 +23,7 @@ let v1, v2, v3;
 let color = 255;
 function preload() {
 
-  colorShader = readShader('visualcomputing/sketches/shaders/color.frag', { matrices: Tree.NONE, varyings: Tree.color4 });
+  colorShader = readShader('/shaders/color.frag', { matrices: Tree.NONE, varyings: Tree.color4 });
 }
 
 function setup() {
@@ -71,14 +70,14 @@ function mouseMoved () {
 }
 ```
 {{< /details >}}
+{{< p5-iframe sketch="/visualcomputing/sketches/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="310" height="310" >}}
+
 
 Añadido al ejercicio del taller 2, se implementaron funcionalidades de **Coloring** al mecanismo, en donde existen 4 opciones de uso:
 - **Sin Texturas:** Usa un Material Normal de P5js y el fondo es blanco, es la opción predeterminada.
 - **Multiplicar:** Usa el primer color del conjunto de ColorPicker para rellenar la atracción mecánica y el segundo color como fondo, sin embargo, hace un efecto de transparencia en donde los colores se vuelven más oscuros a medida que se sobreponen entre sí, así como las mismas partes de un objeto. Se realiza un efecto de **Adición**
 - **Transparencia:** Similar a la opción anterior, se aplica un efecto de transparencia pero los colores se vuelven más claros a medida que se sobreponen entre sí, realizando un efecto de **Sustracción**
 - **Promedio:** Los colores del conjunto de ColorPicker se promedian en sus tres canales (RGB) y se aplica el color resultante tanto en el fondo como en la atracción mecánica
-
-{{< p5-iframe sketch="/visualcomputing/sketches/taller3.js" width="630" height="680" >}}
 
 **Instrucciones de uso**
 {{< hint info >}}
@@ -87,8 +86,7 @@ Para interactuar con la simulación se hace uso del mouse, es posible rotar alre
 El selector de la parte inferior permite cambiar las opciones de Coloring, y el conjunto de ColorPicker permite cambiar los colores que están directamente relacionados a las 3 últimas opciones del ejercicio.
 {{< /hint >}}
 
-
-{{< details "Código Fuente" open >}}
+{{< details "Código Fuente" close >}}
 ```tpl
 //OBJETOS
 let silla;
@@ -309,6 +307,7 @@ function mySelectEvent() {
 }
 ```
 {{< /details >}}
+{{< p5-iframe sketch="/visualcomputing/sketches/taller3.js" width="630" height="680" >}}
 
 ## Recursos
 -  https://www.models-resource.com/ (Modelos en .obj)
