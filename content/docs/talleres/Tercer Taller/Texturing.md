@@ -134,7 +134,7 @@ function draw() {
 }
 ```
 {{< /details >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/texture_grey.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js"  width="650" height="445">}}
+{{< p5-iframe sketch="/visualcomputing/sketches/texture_grey.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js"  width="730" height="530">}}
 
 En el modelo de "cono hexagonal" de HSV, el valor se define como el valor del componente más grande de un color. Esto coloca los tres colores primarios y también todos los "colores secundarios" (cian, amarillo y magenta) en un plano con el blanco, formando una pirámide hexagonal fuera del cubo RGB.
 
@@ -167,4 +167,4 @@ function draw() {
 }
 ```
 {{< /details >}}
-{{< p5-iframe sketch="/visualcomputing/sketches/lumaf.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
+{{< p5-iframe sketch="/visualcomputing/sketches/lumaf.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="730" height="530">}}
